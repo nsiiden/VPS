@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h2>My Supplier Scorecards</h2>
+  <ul>
+    {% for scorecard in scorecards %}
+      <li>{{ scorecard.supplier_name }} - {{ scorecard.overall_rating }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

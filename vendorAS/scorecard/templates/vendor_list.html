@@ -1,0 +1,42 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Vendor List{% endblock %}
+
+{% block content %}
+  <h2>Vendor List</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vendor in vendors %}
+        <tr>
+          <td>{{ vendor.first_name }}</td>
+          <td>{{ vendor.last_name }}</td>
+          <td>{{ vendor.email }}</td>
+          <td>{{ vendor.phone }}</td>
+          <td>
+            <a href="{% url 'vendor_edit' vendor.pk %}" class="btn btn-warning">Edit</a>
+            <form action="{% url 'vendor_delete' vendor.pk %}" method="post" style="display:inline;" onsubmit="return confirmDelete();">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'vendor_create' %}" class="btn btn-primary">Create New Vendor</a>
+{% endblock %}
+
+<script>
+  function confirmDelete() {
+    return confirm("Are you sure you want to delete this vendor?");
+  }
+</script>

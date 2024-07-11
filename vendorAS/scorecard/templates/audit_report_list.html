@@ -1,0 +1,43 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Audit Reports{% endblock %}
+
+{% block content %}
+  <h2>Audit Reports</h2>
+  <form method="GET" action="{% url 'audit_report_list' %}">
+    <div class="form-group">
+      <label for="start_date">Start Date:</label>
+      <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request.GET.start_date }}">
+    </div>
+    <div class="form-group">
+      <label for="end_date">End Date:</label>
+      <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request.GET.end_date }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>IP Address</th>
+        <!--th>Device Name</th-->
+        <th>Browser Type</th>
+        <th>Action</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for audit in audits %}
+        <tr>
+          <td>{{ audit.user.username }}</td>
+          <td>{{ audit.ip_address }}</td>
+          <td>{{ audit.user_agent }}</td>
+          <td>{{ audit.action }}</td>
+          <td>{{ audit.timestamp }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'download_audit_csv' %}" class="btn btn-success">Download CSV</a>
+  <a href="{% url 'download_audit_pdf' %}" class="btn btn-danger">Download PDF</a>
+{% endblock %}

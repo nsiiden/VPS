@@ -1,0 +1,11 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome to the Supplier Management System</h1>
+    <p class="lead">This system helps you manage suppliers, performance areas, score criteria, appraisals, and reports efficiently.</p>
+    <hr class="my-4">
+    <p>Use the navigation bar to access different sections of the system.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'vendor_list' %}" role="button">View Vendors</a>
+  </div>
+{% endblock %}

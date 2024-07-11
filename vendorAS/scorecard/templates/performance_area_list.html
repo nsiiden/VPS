@@ -1,0 +1,42 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Performance Areas{% endblock %}
+
+{% block content %}
+  <h2>Performance Areas</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Area Name</th>
+        <th>Description</th>
+        <th>Percentage Weight</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for performance_area in performance_areas %}
+        <tr>
+          <td>{{ performance_area.area_name }}</td>
+          <td>{{ performance_area.description }}</td>
+          <td>{{ performance_area.percentage_weight }}</td>
+          <td>
+            <a href="{% url 'performance_area_edit' performance_area.pk %}" class="btn btn-warning">Edit</a>
+            <form action="{% url 'performance_area_delete' performance_area.pk %}" method="post" style="display:inline;" onsubmit="return confirmDelete();">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'performance_area_create' %}" class="btn btn-primary">Create New Performance Area</a>
+{% endblock %}
+
+<script>
+  function confirmDelete() {
+    return confirm("Are you sure you want to delete this performance area?");
+  }
+</script>
+
+

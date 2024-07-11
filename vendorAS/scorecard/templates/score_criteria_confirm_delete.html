@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Delete Score Criteria{% endblock %}
+
+{% block content %}
+  <h2>Delete Score Criteria</h2>
+  <p>Are you sure you want to delete the score criteria "{{ score_criteria.criteria_description }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'score_criteria_list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}

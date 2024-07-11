@@ -1,0 +1,14 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Score Criteria Form{% endblock %}
+
+{% block content %}
+  <h2>Score Criteria Form</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'score_criteria_list' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}
+

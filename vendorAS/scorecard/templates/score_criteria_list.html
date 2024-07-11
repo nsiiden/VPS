@@ -1,0 +1,40 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Score Criteria{% endblock %}
+
+{% block content %}
+  <h2>Score Criteria</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Weight</th>
+        <th>Performance Area</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for criteria in score_criteria %}
+        <tr>
+          <td>{{ criteria.criteria_description }}</td>
+          <td>{{ criteria.weight }}</td>
+          <td>{{ criteria.performance_area.area_name }}</td>
+          <td>
+            <a href="{% url 'score_criteria_edit' criteria.pk %}" class="btn btn-warning">Edit</a>
+            <form action="{% url 'score_criteria_delete' criteria.pk %}" method="post" style="display:inline;" onsubmit="return confirmDelete();">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'score_criteria_create' %}" class="btn btn-primary">Create New Score Criteria</a>
+{% endblock %}
+
+<script>
+  function confirmDelete() {
+    return confirm("Are you sure you want to delete this score criteria?");
+  }
+</script>
